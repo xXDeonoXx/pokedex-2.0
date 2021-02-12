@@ -85,7 +85,13 @@ const index = () => {
         <OptionCardWrapper>
           {Options.map((opt) => {
             return (
-              <OptionCard key={opt.text} color={opt.color}>
+              <OptionCard
+                key={opt.text}
+                color={opt.color}
+                onPress={() => {
+                  opt.onClick();
+                }}
+              >
                 <PokeballSvg
                   width={70}
                   height={70}

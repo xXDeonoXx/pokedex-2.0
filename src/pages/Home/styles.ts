@@ -34,7 +34,7 @@ export const OptionCardWrapper = styled.View`
   justify-content: center;
 `;
 
-export const OptionCard = styled.View<OptionCardProps>`
+export const OptionCard = styled.TouchableOpacity<OptionCardProps>`
   background-color: ${({ color }) => color || 'white'};
   width: 45%;
   height: 75px;
