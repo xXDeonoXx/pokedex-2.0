@@ -1,10 +1,7 @@
+import { useNavigation } from '@react-navigation/native';
 import React from 'react';
-import { View, Text } from 'react-native';
+import PokeballSvg from '../../assets/mono-pokeball.svg';
 import {
-  Bottom,
-  BottomTitle,
-  BottomTitleWrapper,
-  BottomViewAll,
   Container,
   MainContainer,
   OptionCard,
@@ -13,9 +10,6 @@ import {
   Title,
   TitleWrapper,
 } from './styles';
-
-import PokeballSvg from '../../assets/mono-pokeball.svg';
-import { useNavigation } from '@react-navigation/native';
 
 interface Option {
   text: string;
@@ -28,43 +22,29 @@ const index = () => {
 
   const Options: Option[] = [
     {
-      text: 'Pokedex',
+      text: 'Generation I',
       color: '#48d0b0',
       onClick: () => {
-        navigator.navigate('Pokedex');
+        navigator.navigate('PokedexList', { generation: 1 });
       },
     },
     {
-      text: 'Moves',
+      text: 'Generation II',
       color: '#f7786b',
       onClick: () => {
         alert('clicou');
       },
     },
     {
-      text: 'Abilities',
+      text: 'Generation III',
       color: '#58aaf6',
       onClick: () => {
         alert('clicou');
       },
     },
     {
-      text: 'Items',
-      color: '#ffce4b',
-      onClick: () => {
-        alert('clicou');
-      },
-    },
-    {
-      text: 'Locationss',
-      color: '#7c538c',
-      onClick: () => {
-        alert('clicou');
-      },
-    },
-    {
-      text: 'Type Charts',
-      color: '#b0736c',
+      text: 'Generation IV',
+      color: '#58aaf6',
       onClick: () => {
         alert('clicou');
       },
@@ -82,8 +62,8 @@ const index = () => {
         />
 
         <TitleWrapper>
-          <Title>What Pokemon </Title>
-          <Title>are you looking for?</Title>
+          <Title>Which region would </Title>
+          <Title>you like to check?</Title>
         </TitleWrapper>
         <OptionCardWrapper>
           {Options.map((opt) => {
@@ -98,7 +78,7 @@ const index = () => {
                 <PokeballSvg
                   width={70}
                   height={70}
-                  style={{ position: 'absolute', right: 0 }}
+                  style={{ position: 'absolute', right: 0, bottom: 0 }}
                   color={'#00000020'}
                 />
                 <OptionCardText>{opt.text}</OptionCardText>
@@ -107,12 +87,6 @@ const index = () => {
           })}
         </OptionCardWrapper>
       </Container>
-      <Bottom>
-        <BottomTitleWrapper>
-          <BottomTitle>Pokémon News</BottomTitle>
-          <BottomViewAll>View All</BottomViewAll>
-        </BottomTitleWrapper>
-      </Bottom>
     </MainContainer>
   );
 };
