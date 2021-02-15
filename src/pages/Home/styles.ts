@@ -12,7 +12,8 @@ export const MainContainer = styled.View`
 export const Container = styled.View`
   height: 70%;
   background-color: white;
-  border-radius: 30px;
+  border-bottom-left-radius: 30px;
+  border-bottom-right-radius: 30px;
 `;
 
 export const TitleWrapper = styled.View`

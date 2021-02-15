@@ -18,12 +18,19 @@ export const Container = styled.View`
   padding: 20px;
 `;
 
+export const Title = styled.Text`
+  font-size: 28px;
+  font-weight: bold;
+  color: black;
+  margin-bottom: 20px;
+`;
+
 export const List = styled.FlatList`
   flex: 1;
   background-color: white;
 `;
 
-export const Card = styled.View<CardProps>`
+export const Card = styled.TouchableOpacity<CardProps>`
   height: 100px;
   width: 100%;
   border-radius: 12px;

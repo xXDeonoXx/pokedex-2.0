@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { PokemonColors } from '../../../shared/PokemonColors';
 import Pokemon from '../../../@Types/Pokemon';
-import getPokedexEntries from '../../../utils/getPokedexEntries';
+import Icon from 'react-native-vector-icons/Feather';
 import {
   Card,
   CardImage,
@@ -11,12 +11,14 @@ import {
   Container,
   List,
   MainContainer,
+  Title,
 } from './styles';
 import capitalize from '../../../utils/capitalize';
 import { usePokedex } from '../../../hooks/pokedex';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { ActivityIndicator } from 'react-native';
 import LoadingScreen from '../../../components/LoadingScreen';
+import HeaderWrapper from '../../../components/HeaderWrapper';
 
 const index = () => {
   const { setPokedex, pokemons } = usePokedex();
@@ -41,7 +43,12 @@ const index = () => {
 
   const PokemonCard = ({ item: pokemon }: { item: Pokemon }) => {
     return (
-      <Card color={PokemonColors[pokemon.color] || pokemon.color}>
+      <Card
+        onPress={() => {
+          alert('clicou');
+        }}
+        color={PokemonColors[pokemon.color] || pokemon.color}
+      >
         <CardImage
           resizeMode={'cover'}
           source={{
@@ -61,6 +68,17 @@ const index = () => {
   return (
     <MainContainer>
       <Container>
+        <HeaderWrapper>
+          <Icon
+            onPress={() => {
+              navigator.goBack();
+            }}
+            name={'arrow-left'}
+            color={'black'}
+            size={30}
+          />
+        </HeaderWrapper>
+        <Title>Pokedex</Title>
         <List
           data={pokemons}
           extraData={loading}
@@ -68,6 +86,7 @@ const index = () => {
           keyExtractor={(item) => {
             return item.pokedex_number.toString();
           }}
+          showsVerticalScrollIndicator={false}
         />
         {/* {pokemons.map((pokemon) => {
           return PokemonCard(pokemon);

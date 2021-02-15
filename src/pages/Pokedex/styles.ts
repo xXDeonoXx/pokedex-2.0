@@ -12,14 +12,13 @@ export const MainContainer = styled.View`
 export const Container = styled.View`
   flex: 1;
   background-color: white;
-  border-radius: 30px;
+  padding: 20px;
 `;
 
 export const TitleWrapper = styled.View`
   width: 80%;
-  margin-top: 30px;
+  margin-top: 10px;
   margin-bottom: 50px;
-  padding: 12px;
 `;
 
 export const Title = styled.Text`

@@ -1,6 +1,8 @@
 import { useNavigation } from '@react-navigation/native';
 import React from 'react';
+import Icon from 'react-native-vector-icons/Feather';
 import PokeballSvg from '../../assets/mono-pokeball.svg';
+import HeaderWrapper from '../../components/HeaderWrapper';
 import {
   Container,
   MainContainer,
@@ -54,13 +56,22 @@ const index = () => {
   return (
     <MainContainer>
       <Container>
+        <HeaderWrapper>
+          <Icon
+            onPress={() => {
+              navigator.goBack();
+            }}
+            name={'arrow-left'}
+            color={'black'}
+            size={30}
+          />
+        </HeaderWrapper>
         <PokeballSvg
           width={200}
           height={200}
           style={{ position: 'absolute', right: -50, top: -50 }}
           color={'#00000020'}
         />
-
         <TitleWrapper>
           <Title>Which region would </Title>
           <Title>you like to check?</Title>
