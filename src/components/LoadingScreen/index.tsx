@@ -10,7 +10,7 @@ const index = ({ message }: LoadingScreenProps) => {
   return (
     <MainContainer>
       <ActivityIndicator size="large" color="#d60a2e" />
-      <Message>Geting updated data, please wait.</Message>
+      <Message>{message}</Message>
     </MainContainer>
   );
 };

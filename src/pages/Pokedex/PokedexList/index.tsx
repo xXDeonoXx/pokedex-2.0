@@ -64,7 +64,7 @@ const index = () => {
     return (
       <Card
         onPress={() => {
-          console.log(scrollY);
+          navigator.navigate('PokemonDetails', { pokemon });
         }}
         color={PokemonColors[pokemon.color] || pokemon.color}
         style={{ opacity, transform: [{ scale: opacity }] }}
@@ -83,7 +83,9 @@ const index = () => {
     );
   };
 
-  if (loading) return <LoadingScreen />;
+  if (loading)
+    return <LoadingScreen message={'Geting updated data, please wait.'} />;
+
   return (
     <MainContainer>
       <Container>

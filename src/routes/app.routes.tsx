@@ -1,11 +1,11 @@
-import React from 'react';
-import { View, Text } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
+import React from 'react';
 
 // pages
 import Home from '../pages/Home';
 import Pokedex from '../pages/Pokedex';
 import PokedexList from '../pages/Pokedex/PokedexList';
+import PokemonDetails from '../pages/Pokedex/PokemonDetails';
 
 const AppRoutes = () => {
   const Stack = createStackNavigator();
@@ -21,24 +21,9 @@ const AppRoutes = () => {
           },
         }}
       />
-      <Stack.Screen
-        name="Pokedex"
-        component={Pokedex}
-        // options={{
-        //   header: () => {
-        //     return <></>;
-        //   },
-        // }}
-      />
-      <Stack.Screen
-        name="PokedexList"
-        component={PokedexList}
-        // options={{
-        //   header: () => {
-        //     return <></>;
-        //   },
-        // }}
-      />
+      <Stack.Screen name="Pokedex" component={Pokedex} />
+      <Stack.Screen name="PokedexList" component={PokedexList} />
+      <Stack.Screen name="PokemonDetails" component={PokemonDetails} />
     </Stack.Navigator>
   );
 };
