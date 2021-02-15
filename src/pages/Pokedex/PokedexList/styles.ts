@@ -18,6 +18,11 @@ export const Container = styled.View`
   padding: 20px;
 `;
 
+export const List = styled.FlatList`
+  flex: 1;
+  background-color: white;
+`;
+
 export const Card = styled.View<CardProps>`
   height: 100px;
   width: 100%;

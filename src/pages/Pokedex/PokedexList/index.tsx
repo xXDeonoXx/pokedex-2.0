@@ -1,4 +1,7 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { PokemonColors } from '../../../shared/PokemonColors';
+import Pokemon from '../../../@Types/Pokemon';
+import getPokedexEntries from '../../../utils/getPokedexEntries';
 import {
   Card,
   CardImage,
@@ -6,32 +9,54 @@ import {
   CardNumber,
   CardTitle,
   Container,
+  List,
   MainContainer,
 } from './styles';
-
-interface Option {
-  text: string;
-  color: string;
-  onClick: Function;
-}
+import capitalize from '../../../utils/capitalize';
 
 const index = () => {
+  const [loading, setLoading] = useState(true);
+  const [pokemons, setPokemons] = useState<Pokemon[]>([]);
+
+  useEffect(() => {
+    const func = async () => {
+      const pks: Pokemon[] | undefined = await getPokedexEntries(2);
+      if (pks) {
+        setPokemons(pks);
+        setLoading(false);
+      }
+    };
+    func();
+  }, []);
+
+  const PokemonCard = ({ item: pokemon }: { item: Pokemon }) => {
+    return (
+      <Card color={PokemonColors[pokemon.color] || pokemon.color}>
+        <CardImage
+          resizeMode={'cover'}
+          source={{
+            uri: pokemon.image_url,
+          }}
+        />
+        <CardInnerContainer>
+          <CardTitle>{capitalize(pokemon.name)}</CardTitle>
+          <CardNumber>#{pokemon.pokedex_number}</CardNumber>
+        </CardInnerContainer>
+      </Card>
+    );
+  };
+
   return (
     <MainContainer>
       <Container>
-        <Card color={'#91caa7'}>
-          <CardImage
-            resizeMode={'cover'}
-            source={{
-              uri:
-                'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png',
-            }}
-          />
-          <CardInnerContainer>
-            <CardTitle>Bulbasaur</CardTitle>
-            <CardNumber>#001</CardNumber>
-          </CardInnerContainer>
-        </Card>
+        <List
+          data={pokemons}
+          renderItem={PokemonCard}
+          keyExtractor={(item) => item.entry_number}
+        />
+        {/* {pokemons.map((pokemon) => {
+          return PokemonCard(pokemon);
+        })} */}
       </Container>
     </MainContainer>
   );
