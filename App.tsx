@@ -3,12 +3,15 @@ import { NavigationContainer } from '@react-navigation/native';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import Routes from './src/routes';
+import AppProvider from './src/hooks';
 
 const App = () => {
   return (
-    <NavigationContainer>
-      <Routes />
-    </NavigationContainer>
+    <AppProvider>
+      <NavigationContainer>
+        <Routes />
+      </NavigationContainer>
+    </AppProvider>
   );
 };
 

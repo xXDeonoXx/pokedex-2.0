@@ -13,17 +13,27 @@ import {
   MainContainer,
 } from './styles';
 import capitalize from '../../../utils/capitalize';
+import { usePokedex } from '../../../hooks/pokedex';
+import { useNavigation, useRoute } from '@react-navigation/native';
+import { ActivityIndicator } from 'react-native';
+import LoadingScreen from '../../../components/LoadingScreen';
 
 const index = () => {
+  const { setPokedex, pokemons } = usePokedex();
+  const navigator = useNavigation();
+  const router = useRoute();
+
   const [loading, setLoading] = useState(true);
-  const [pokemons, setPokemons] = useState<Pokemon[]>([]);
+  // const [pokemons, setPokemons] = useState<Pokemon[]>([]);
 
   useEffect(() => {
     const func = async () => {
-      const pks: Pokemon[] | undefined = await getPokedexEntries(2);
-      if (pks) {
-        setPokemons(pks);
+      try {
+        const { pokedexId } = router?.params;
+        await setPokedex(pokedexId);
         setLoading(false);
+      } catch (error) {
+        console.log(error);
       }
     };
     func();
@@ -46,13 +56,18 @@ const index = () => {
     );
   };
 
+  if (loading) return <LoadingScreen />;
+
   return (
     <MainContainer>
       <Container>
         <List
           data={pokemons}
+          extraData={loading}
           renderItem={PokemonCard}
-          keyExtractor={(item) => item.entry_number}
+          keyExtractor={(item) => {
+            return item.pokedex_number.toString();
+          }}
         />
         {/* {pokemons.map((pokemon) => {
           return PokemonCard(pokemon);

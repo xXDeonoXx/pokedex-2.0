@@ -25,28 +25,28 @@ const index = () => {
       text: 'Generation I',
       color: '#48d0b0',
       onClick: () => {
-        navigator.navigate('PokedexList', { generation: 1 });
+        navigator.navigate('PokedexList', { pokedexId: 2 });
       },
     },
     {
       text: 'Generation II',
       color: '#f7786b',
       onClick: () => {
-        alert('clicou');
+        navigator.navigate('PokedexList', { pokedexId: 3 });
       },
     },
     {
       text: 'Generation III',
       color: '#58aaf6',
       onClick: () => {
-        alert('clicou');
+        navigator.navigate('PokedexList', { pokedexId: 4 });
       },
     },
     {
       text: 'Generation IV',
       color: '#58aaf6',
       onClick: () => {
-        alert('clicou');
+        navigator.navigate('PokedexList', { pokedexId: 5 });
       },
     },
   ];

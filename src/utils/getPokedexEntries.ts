@@ -8,11 +8,10 @@ export default async (pokedexId: number) => {
     const pokedex = response.data.pokemon_entries;
 
     for (const pokemon of pokedex) {
-      const pokemonSpeciesData = (
-        await api.get(`pokemon-species/${pokemon.entry_number}`)
-      ).data;
+      const pokemonSpeciesData = (await api.get(pokemon.pokemon_species.url))
+        .data;
       const pokemonData = await (
-        await api.get(`/pokemon/${pokemon.entry_number}`)
+        await api.get(`/pokemon/${pokemonSpeciesData.id}`)
       ).data;
       const pk: Pokemon = {
         name: pokemonData?.name,
@@ -21,7 +20,6 @@ export default async (pokedexId: number) => {
         image_url: pokemonData?.sprites.other['official-artwork'].front_default,
         pokedex_number: pokemon?.entry_number,
       };
-      console.log(pokemonSpeciesData?.color.name);
       pokemons.push(pk);
     }
     return pokemons;
