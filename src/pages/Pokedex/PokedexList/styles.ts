@@ -1,10 +1,13 @@
-import { Dimensions } from 'react-native';
+import { Animated, Dimensions, FlatList, View } from 'react-native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 import styled from 'styled-components/native';
 
 const window = Dimensions.get('window');
 
 interface CardProps {
   color: string;
+  onPress?: Function;
+  style?: Object;
 }
 
 export const MainContainer = styled.View`
@@ -25,12 +28,14 @@ export const Title = styled.Text`
   margin-bottom: 20px;
 `;
 
-export const List = styled.FlatList`
+export const List = styled(Animated.createAnimatedComponent(FlatList))`
   flex: 1;
   background-color: white;
 `;
 
-export const Card = styled.TouchableOpacity<CardProps>`
+export const Card = styled(
+  Animated.createAnimatedComponent(TouchableOpacity)
+)<CardProps>`
   height: 100px;
   width: 100%;
   border-radius: 12px;

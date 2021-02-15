@@ -1,7 +1,13 @@
-import React, { useEffect, useState } from 'react';
-import { PokemonColors } from '../../../shared/PokemonColors';
-import Pokemon from '../../../@Types/Pokemon';
+import { useNavigation, useRoute } from '@react-navigation/native';
+import React, { useEffect, useRef, useState } from 'react';
+import { Animated, View, Text, Dimensions } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
+import Pokemon from '../../../@Types/Pokemon';
+import HeaderWrapper from '../../../components/HeaderWrapper';
+import LoadingScreen from '../../../components/LoadingScreen';
+import { usePokedex } from '../../../hooks/pokedex';
+import { PokemonColors } from '../../../shared/PokemonColors';
+import capitalize from '../../../utils/capitalize';
 import {
   Card,
   CardImage,
@@ -13,20 +19,20 @@ import {
   MainContainer,
   Title,
 } from './styles';
-import capitalize from '../../../utils/capitalize';
-import { usePokedex } from '../../../hooks/pokedex';
-import { useNavigation, useRoute } from '@react-navigation/native';
-import { ActivityIndicator } from 'react-native';
-import LoadingScreen from '../../../components/LoadingScreen';
-import HeaderWrapper from '../../../components/HeaderWrapper';
 
 const index = () => {
   const { setPokedex, pokemons } = usePokedex();
   const navigator = useNavigation();
   const router = useRoute();
 
+  const window = Dimensions.get('window');
+
   const [loading, setLoading] = useState(true);
-  // const [pokemons, setPokemons] = useState<Pokemon[]>([]);
+  const scrollY = React.useRef(new Animated.Value(0)).current;
+  const onListScroll = Animated.event(
+    [{ nativeEvent: { contentOffset: { y: scrollY } } }],
+    { useNativeDriver: true }
+  );
 
   useEffect(() => {
     const func = async () => {
@@ -41,13 +47,27 @@ const index = () => {
     func();
   }, []);
 
-  const PokemonCard = ({ item: pokemon }: { item: Pokemon }) => {
+  const PokemonCard = ({
+    item: pokemon,
+    index,
+  }: {
+    item: Pokemon;
+    index: number;
+  }) => {
+    const inputRange = [-1, 0, 110 * index, 110 * (index + 1)];
+
+    const opacity = scrollY.interpolate({
+      inputRange,
+      outputRange: [0, 1, 1, 0],
+    });
+
     return (
       <Card
         onPress={() => {
-          alert('clicou');
+          console.log(scrollY);
         }}
         color={PokemonColors[pokemon.color] || pokemon.color}
+        style={{ opacity, transform: [{ scale: opacity }] }}
       >
         <CardImage
           resizeMode={'cover'}
@@ -64,22 +84,24 @@ const index = () => {
   };
 
   if (loading) return <LoadingScreen />;
-
   return (
     <MainContainer>
       <Container>
-        <HeaderWrapper>
-          <Icon
-            onPress={() => {
-              navigator.goBack();
-            }}
-            name={'arrow-left'}
-            color={'black'}
-            size={30}
-          />
-        </HeaderWrapper>
-        <Title>Pokedex</Title>
+        <View>
+          <HeaderWrapper>
+            <Icon
+              onPress={() => {
+                navigator.goBack();
+              }}
+              name={'arrow-left'}
+              color={'black'}
+              size={30}
+            />
+          </HeaderWrapper>
+          <Title>Pokedex</Title>
+        </View>
         <List
+          scrollEventThrottle={16}
           data={pokemons}
           extraData={loading}
           renderItem={PokemonCard}
@@ -87,10 +109,8 @@ const index = () => {
             return item.pokedex_number.toString();
           }}
           showsVerticalScrollIndicator={false}
+          onScroll={onListScroll}
         />
-        {/* {pokemons.map((pokemon) => {
-          return PokemonCard(pokemon);
-        })} */}
       </Container>
     </MainContainer>
   );
