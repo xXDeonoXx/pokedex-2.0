@@ -1,5 +1,6 @@
 import { createStackNavigator } from '@react-navigation/stack';
 import React from 'react';
+import { createSharedElementStackNavigator } from 'react-navigation-shared-element';
 
 // pages
 import Home from '../pages/Home';
@@ -8,10 +9,10 @@ import PokedexList from '../pages/Pokedex/PokedexList';
 import PokemonDetails from '../pages/Pokedex/PokemonDetails';
 
 const AppRoutes = () => {
-  const Stack = createStackNavigator();
+  const Stack = createSharedElementStackNavigator();
 
   return (
-    <Stack.Navigator headerMode={'none'}>
+    <Stack.Navigator headerMode={'none'} initialRouteName="Home">
       <Stack.Screen
         name="Home"
         component={Home}
@@ -23,7 +24,26 @@ const AppRoutes = () => {
       />
       <Stack.Screen name="Pokedex" component={Pokedex} />
       <Stack.Screen name="PokedexList" component={PokedexList} />
-      <Stack.Screen name="PokemonDetails" component={PokemonDetails} />
+      <Stack.Screen
+        name="PokemonDetails"
+        component={PokemonDetails}
+        options={() => {
+          return {
+            gestureEnabled: false,
+            transitionSpec: {
+              open: { animation: 'timing', config: { duration: 300 } },
+              close: { animation: 'timing', config: { duration: 300 } },
+            },
+            cardStyleInterpolator: ({ current: { progress } }) => {
+              return {
+                cardStyle: {
+                  opacity: progress,
+                },
+              };
+            },
+          };
+        }}
+      />
     </Stack.Navigator>
   );
 };

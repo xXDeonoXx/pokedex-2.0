@@ -47,8 +47,8 @@ export const Card = styled(
 `;
 
 export const CardImage = styled.Image`
-  width: 30%;
-  height: 100%;
+  width: 100px;
+  height: 100px;
 `;
 
 export const CardInnerContainer = styled.View`

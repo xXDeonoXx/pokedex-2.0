@@ -2,6 +2,7 @@ import { useNavigation, useRoute } from '@react-navigation/native';
 import React, { useEffect, useRef, useState } from 'react';
 import { Animated, View, Text, Dimensions } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
+import { SharedElement } from 'react-navigation-shared-element';
 import Pokemon from '../../../@Types/Pokemon';
 import HeaderWrapper from '../../../components/HeaderWrapper';
 import LoadingScreen from '../../../components/LoadingScreen';
@@ -69,14 +70,22 @@ const index = () => {
         color={PokemonColors[pokemon.color] || pokemon.color}
         style={{ opacity, transform: [{ scale: opacity }] }}
       >
-        <CardImage
-          resizeMode={'cover'}
-          source={{
-            uri: pokemon.image_url,
-          }}
-        />
+        <SharedElement id={`item.${pokemon.pokedex_number}.image`}>
+          <CardImage
+            resizeMode={'cover'}
+            source={{
+              uri: pokemon.image_url,
+            }}
+          />
+        </SharedElement>
+
         <CardInnerContainer>
-          <CardTitle>{capitalize(pokemon.name)}</CardTitle>
+          <SharedElement
+            style={{ width: 200, height: 80 }}
+            id={`item.${pokemon.name}.text`}
+          >
+            <CardTitle>{capitalize(pokemon.name)}</CardTitle>
+          </SharedElement>
           <CardNumber>#{pokemon.pokedex_number}</CardNumber>
         </CardInnerContainer>
       </Card>
@@ -117,4 +126,5 @@ const index = () => {
     </MainContainer>
   );
 };
+
 export default index;
