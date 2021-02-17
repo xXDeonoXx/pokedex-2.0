@@ -19,8 +19,8 @@ console.log(pokemon)
     <MainContainer>
       <FlavorText>{pokemon?.flavor_text.replace(/(\r\n|\n|\r)/gm, " ")}</FlavorText>
       <InfoContainer>
-        <InfoWrapper><InfoLabel>Height</InfoLabel><InfoText>{`${Number(pokemon?.height) / 100}m `}</InfoText></InfoWrapper>
-        <InfoWrapper><InfoLabel>Weight</InfoLabel><InfoText>{`${Number(pokemon?.weight) / 100}kg`}</InfoText></InfoWrapper>
+        <InfoWrapper><InfoLabel>Height</InfoLabel><InfoText>{`${Number(pokemon?.height) / 10}m `}</InfoText></InfoWrapper>
+        <InfoWrapper><InfoLabel>Weight</InfoLabel><InfoText>{`${Number(pokemon?.weight) / 10}kg`}</InfoText></InfoWrapper>
       </InfoContainer>
       
     </MainContainer>
