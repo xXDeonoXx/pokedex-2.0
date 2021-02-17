@@ -4,15 +4,16 @@ interface ContainerProps {
   color?: string;
 }
 
-export const MainContainer = styled.View`
+export const MainContainer = styled.View<ContainerProps>`
   flex: 1;
-  background-color: #f5f5f5;
+  background-color: ${({ color }) => color || 'white'};
 `;
 
-export const Container = styled.View<ContainerProps>`
+export const TopContainer = styled.View<ContainerProps>`
   flex: 1;
   background-color: ${({ color }) => color || 'white'};
   padding: 20px;
+  z-index: 2;
 `;
 
 export const Title = styled.Text`
@@ -23,12 +24,23 @@ export const Title = styled.Text`
 
 export const ImageWrapper = styled.View`
   width: 100%;
-  height: 300px;
+  height: 250px;
   justify-content: center;
   align-items: center;
 `;
 
 export const PokemonImage = styled.Image`
-  height: 250px;
-  width: 250px;
+  height: 300px;
+  width: 300px;
+  z-index: 5;
+`;
+
+export const BottomContainer = styled.View`
+  height: 50%;
+  background-color: white;
+  padding: 20px;
+  z-index: 1;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  padding-top: 60px;
 `;

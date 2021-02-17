@@ -72,10 +72,9 @@ const index = () => {
       >
         <SharedElement id={`item.${pokemon.pokedex_number}.image`}>
           <CardImage
-            resizeMode={'cover'}
-            source={{
-              uri: pokemon.image_url,
-            }}
+              source={{
+                uri: pokemon.image_url,
+              }}
           />
         </SharedElement>
 

@@ -1,5 +1,6 @@
 import { createStackNavigator } from '@react-navigation/stack';
 import React from 'react';
+import { Easing } from 'react-native-reanimated';
 import { createSharedElementStackNavigator } from 'react-navigation-shared-element';
 
 // pages
@@ -31,10 +32,10 @@ const AppRoutes = () => {
           return {
             gestureEnabled: false,
             transitionSpec: {
-              open: { animation: 'timing', config: { duration: 300 } },
-              close: { animation: 'timing', config: { duration: 300 } },
+              open: { animation: 'timing', config: { duration: 800 } },
+              close: { animation: 'timing', config: { duration: 800 } },                            
             },
-            cardStyleInterpolator: ({ current: { progress } }) => {
+            cardStyleInterpolator: ({ current: { progress} }) => {
               return {
                 cardStyle: {
                   opacity: progress,

@@ -42,13 +42,13 @@ export const Card = styled(
   margin-bottom: 10px;
   justify-content: space-between;
   background-color: ${({ color }) => color || 'white'};
-  elevation: 5;
   flex-direction: row;
 `;
 
 export const CardImage = styled.Image`
   width: 100px;
   height: 100px;
+  z-index: 5;
 `;
 
 export const CardInnerContainer = styled.View`

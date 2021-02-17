@@ -19,6 +19,20 @@ export default async (pokedexId: number) => {
         flavor_text: pokemonSpeciesData?.flavor_text_entries[0].flavor_text,
         image_url: pokemonData?.sprites.other['official-artwork'].front_default,
         pokedex_number: pokemon?.entry_number,
+        stats: pokemonData.stats.map((stat: any) => {
+          return { name: stat.stat.name, base_stat: stat.base_stat };
+        }),
+        height: pokemonData.height,
+        weight: pokemonData.weight,
+        moves: pokemonData.moves.map((move: any) => {
+          return {
+            name: move.move.name,
+            details: move.version_group_details[0]['level_learned_at'],
+          };
+        }),
+        types: pokemonData.types.map((type: any) => {
+          return type.type.name;
+        }),
       };
       pokemons.push(pk);
     }
