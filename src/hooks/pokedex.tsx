@@ -45,7 +45,6 @@ const PokedexProvider: React.FC = ({ children }) => {
     const storagePks = await AsyncStorage.getItem(`POKEDEX_${pokedexId}`);
     if (!storagePks) {
       const pks = await updateCache(pokedexId);
-      console.log(pks);
       if (pks) {
         setData({ name: '', pokemons: pks });
       }

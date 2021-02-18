@@ -33,6 +33,10 @@ export default async (pokedexId: number) => {
         types: pokemonData.types.map((type: any) => {
           return type.type.name;
         }),
+        abilities: pokemonData.abilities.map((ability: any) => {
+          return ability.ability.name;
+        }),
+        habitat: pokemonSpeciesData.habitat.name,
       };
       pokemons.push(pk);
     }

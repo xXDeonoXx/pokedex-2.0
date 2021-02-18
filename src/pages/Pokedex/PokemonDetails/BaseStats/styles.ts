@@ -5,12 +5,6 @@ export const MainContainer = styled.View`
   background-color: transparent;
 `;
 
-export const FlavorText = styled.Text`
-  font-size: 18px;
-  color: black;
-  margin-bottom: 20px;
-`;
-
 export const InfoContainer = styled.View`
   width: 100%;
   height: 150px;
@@ -21,6 +15,7 @@ export const InfoWrapper = styled.View`
   justify-content: space-between;
   flex-direction: row;
   margin-bottom: 10px;
+  align-items: center;
 `;
 
 export const InfoLabel = styled.Text`
@@ -33,5 +28,4 @@ export const InfoText = styled.Text`
   font-size: 14px;
   color: black;
   font-weight: bold;
-  min-width: 50%;
 `;

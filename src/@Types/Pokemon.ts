@@ -17,4 +17,6 @@ export default interface Pokemon {
     }
   ];
   types: string[];
+  abilities: string[];
+  habitat: string;
 }

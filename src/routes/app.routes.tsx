@@ -32,7 +32,7 @@ const AppRoutes = () => {
           return {
             gestureEnabled: false,
             transitionSpec: {
-              open: { animation: 'timing', config: { duration: 800 } },
+              open: { animation: 'timing', config: { duration: 800, delay: 200 } },
               close: { animation: 'timing', config: { duration: 800 } },                            
             },
             cardStyleInterpolator: ({ current: { progress} }) => {
