@@ -4,8 +4,8 @@ Second attempt on creating a pokedex app with React native consuming the [Poke a
 
 Goals:
 
-- [ ] Use animations to enchance visuals
-- [ ] Animated transitions using shared elements
+- [x] Use animations to enchance visuals
+- [x] Animated transitions using shared elements
 - [x] Caching api data to prevent overloading poke api servers
 - [x] Lists all 4 initial regions
 - [ ] Use/Show all the info available
