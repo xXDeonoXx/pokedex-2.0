@@ -1,3 +1,4 @@
+import { Animated } from 'react-native';
 import styled from 'styled-components/native';
 
 interface ContainerProps {
@@ -9,9 +10,9 @@ export const MainContainer = styled.View<ContainerProps>`
   background-color: ${({ color }) => color || 'white'};
 `;
 
-export const TopContainer = styled.View<ContainerProps>`
+export const TopContainer = styled.View`
   flex: 1;
-  background-color: ${({ color }) => color || 'white'};
+  background-color: transparent;
   padding: 20px;
   z-index: 2;
 `;
@@ -32,7 +33,6 @@ export const ImageWrapper = styled.View`
 export const PokemonImage = styled.Image`
   height: 300px;
   width: 300px;
-  z-index: 5;
 `;
 
 export const BottomContainer = styled.View`
@@ -43,4 +43,14 @@ export const BottomContainer = styled.View`
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
   padding-top: 60px;
+`;
+
+export const AbsoluteContainer = styled(Animated.View)`
+  position: absolute;
+  height: 70%;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+  z-index: 0;
 `;

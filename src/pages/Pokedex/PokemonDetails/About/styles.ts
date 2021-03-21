@@ -1,6 +1,6 @@
 import styled from 'styled-components/native';
 
-export const MainContainer = styled.View`
+export const MainContainer = styled.ScrollView`
   flex: 1;
   background-color: transparent;
 `;

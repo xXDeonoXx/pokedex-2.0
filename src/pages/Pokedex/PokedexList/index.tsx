@@ -72,9 +72,9 @@ const index = () => {
       >
         <SharedElement id={`item.${pokemon.pokedex_number}.image`}>
           <CardImage
-              source={{
-                uri: pokemon.image_url,
-              }}
+            source={{
+              uri: pokemon.image_url,
+            }}
           />
         </SharedElement>
 
@@ -115,7 +115,7 @@ const index = () => {
           data={pokemons}
           extraData={loading}
           renderItem={PokemonCard}
-          keyExtractor={(item) => {
+          keyExtractor={(item: any) => {
             return item.pokedex_number.toString();
           }}
           showsVerticalScrollIndicator={false}

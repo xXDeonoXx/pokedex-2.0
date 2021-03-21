@@ -1,6 +1,6 @@
 import { useNavigation, useRoute } from '@react-navigation/native';
-import React, { useEffect, useState } from 'react';
-import { View, Text } from 'react-native';
+import React, { useEffect, useRef, useState } from 'react';
+import { View, Text, Animated, Easing } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 import { SharedElement } from 'react-navigation-shared-element';
 import Pokemon from '../../../@Types/Pokemon';
@@ -13,12 +13,14 @@ import {
   Title,
   ImageWrapper,
   BottomContainer,
+  AbsoluteContainer,
 } from './styles';
 import { PokemonColors } from '../../../shared/PokemonColors';
 import capitalize from '../../../utils/capitalize';
 import { SceneMap, TabBar, TabView } from 'react-native-tab-view';
 import About from './About';
 import BaseStats from './BaseStats';
+import PokeballSvg from '../../../assets/mono-pokeball.svg';
 
 const index = () => {
   const [loading, setLoading] = useState(true);
@@ -26,6 +28,35 @@ const index = () => {
   const [tabIndex, setTabIndex] = useState(0);
   const navigator = useNavigation();
   const router = useRoute();
+
+  const opacity = useRef(new Animated.Value(0)).current;
+
+  Animated.timing(opacity, {
+    toValue: 1,
+    duration: 1000,
+    delay: 500,
+    useNativeDriver: false,
+    easing: Easing.exp,
+  }).start();
+
+  const rotation = useRef(new Animated.Value(0)).current;
+
+  Animated.loop(
+    Animated.sequence([
+      Animated.timing(rotation, {
+        toValue: 1,
+        duration: 5000,
+        useNativeDriver: false,
+        easing: Easing.linear,
+      }),
+    ]),
+    { iterations: -1 }
+  ).start();
+
+  const rotationInterpolated = rotation.interpolate({
+    inputRange: [0, 1],
+    outputRange: ['0deg', '360deg'],
+  });
 
   useEffect(() => {
     const func = async () => {
@@ -67,7 +98,17 @@ const index = () => {
 
   return (
     <MainContainer color={PokemonColors[pokemon?.color]}>
-      <TopContainer color={PokemonColors[pokemon?.color]}>
+      <AbsoluteContainer
+        style={{ opacity, transform: [{ rotateZ: rotationInterpolated }] }}
+      >
+        <PokeballSvg
+          width={350}
+          height={350}
+          style={{ position: 'absolute' }}
+          color={'#00000020'}
+        />
+      </AbsoluteContainer>
+      <TopContainer>
         <View>
           <HeaderWrapper>
             <Icon
@@ -97,6 +138,7 @@ const index = () => {
           </SharedElement>
         </ImageWrapper>
       </TopContainer>
+
       <BottomContainer>
         <TabView
           removeClippedSubviews

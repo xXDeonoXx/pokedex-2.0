@@ -13,9 +13,9 @@ const AppRoutes = () => {
   const Stack = createSharedElementStackNavigator();
 
   return (
-    <Stack.Navigator headerMode={'none'} initialRouteName="Home">
+    <Stack.Navigator headerMode={'none'} initialRouteName='Home'>
       <Stack.Screen
-        name="Home"
+        name='Home'
         component={Home}
         options={{
           header: () => {
@@ -23,19 +23,22 @@ const AppRoutes = () => {
           },
         }}
       />
-      <Stack.Screen name="Pokedex" component={Pokedex} />
-      <Stack.Screen name="PokedexList" component={PokedexList} />
+      <Stack.Screen name='Pokedex' component={Pokedex} />
+      <Stack.Screen name='PokedexList' component={PokedexList} />
       <Stack.Screen
-        name="PokemonDetails"
+        name='PokemonDetails'
         component={PokemonDetails}
         options={() => {
           return {
             gestureEnabled: false,
             transitionSpec: {
-              open: { animation: 'timing', config: { duration: 800, delay: 200 } },
-              close: { animation: 'timing', config: { duration: 800 } },                            
+              open: {
+                animation: 'timing',
+                config: { duration: 500, delay: 1 },
+              },
+              close: { animation: 'timing', config: { duration: 500 } },
             },
-            cardStyleInterpolator: ({ current: { progress} }) => {
+            cardStyleInterpolator: ({ current: { progress } }) => {
               return {
                 cardStyle: {
                   opacity: progress,
